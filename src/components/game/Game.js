@@ -51,6 +51,7 @@ function Game() {
             guessed={guessed}
             letters={letters}
             disabled={gameState !== "active" || errorAnimation}
+            input={input}
           />
         </div>
       </div>

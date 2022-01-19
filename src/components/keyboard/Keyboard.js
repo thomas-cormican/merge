@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import "./keyboard.css";
 import { BsBackspace } from "react-icons/bs";
 import Key from "./Key";
 
-function Keyboard({ onKeyPress, onSubmit, guessed, letters, disabled }) {
+function Keyboard({ input, onKeyPress, onSubmit, guessed, letters, disabled }) {
+  //handle clicks on virtual keyboard
   const handleClick = (e) => {
     if (disabled) {
       return;
@@ -22,6 +23,43 @@ function Keyboard({ onKeyPress, onSubmit, guessed, letters, disabled }) {
       });
     }
   };
+
+  //handle keypresses
+  const handleKeyPress = useCallback(
+    (e) => {
+      if (disabled) {
+        return;
+      }
+      if (
+        (e.keyCode >= 65 && e.keyCode <= 90) ||
+        e.keyCode === 13 ||
+        e.keyCode === 8
+      ) {
+        if (e.key === "Enter") {
+          onSubmit(e);
+        } else if (e.key === "Backspace") {
+          onKeyPress((prev) => prev.slice(0, prev.length - 1));
+        } else {
+          onKeyPress((prev) => {
+            if (prev.length === 5) {
+              return prev;
+            } else {
+              return [...prev, e.key.toUpperCase()];
+            }
+          });
+        }
+      }
+    },
+    [disabled, onSubmit, onKeyPress]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+
+    return function cleanup() {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [input, handleKeyPress]);
 
   const compareKey = (key) => {
     let value = 0;

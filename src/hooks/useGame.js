@@ -56,9 +56,7 @@ export const useGame = (createError) => {
 
   const handleSubmit = useCallback(
     (e) => {
-      e.preventDefault();
       const parsedWord = input.join("").toLowerCase();
-
       if (input.length === 5) {
         if (list.includes(parsedWord)) {
           setGuessed((prev) => [...prev, input]);
