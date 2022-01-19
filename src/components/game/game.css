@@ -1,0 +1,49 @@
+.game-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #222222;
+  color: white;
+  overflow: hidden;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  height: 100vh;
+}
+
+.error {
+  height: 65px;
+  color: white;
+  background-color: crimson;
+  padding: 20px;
+  border-radius: 4px;
+  position: absolute;
+  top: 80px;
+  z-index: 1000;
+}
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
+}
