@@ -26,6 +26,16 @@
   border-radius: 4px;
   padding: 40px;
   margin-right: 20px;
+  overflow: auto;
+  max-height: 100vh;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 .modal-body h3 {
@@ -50,4 +60,13 @@
 .restart-button:hover {
   color: lightgrey;
   background-color: #263281;
+}
+
+.modal-instructions {
+  text-align: left;
+}
+
+.instructions-color {
+  padding: 4px;
+  border-radius: 4px;
 }

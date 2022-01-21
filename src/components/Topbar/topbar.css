@@ -17,6 +17,7 @@
 
 .top-bar-left {
   flex: 25%;
+  font-size: 22px;
   text-align: left;
 }
 
@@ -29,6 +30,12 @@
   flex: 25%;
   font-size: 22px;
   text-align: right;
+}
+
+.top-bar-left svg {
+  position: relative;
+  top: 4px;
+  cursor: pointer;
 }
 
 .top-bar-right svg {

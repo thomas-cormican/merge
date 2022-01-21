@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./game.css";
 import Keyboard from "../keyboard/Keyboard";
 import Modal from "../modal/Modal";
@@ -25,12 +25,18 @@ function Game() {
     restart,
   } = useGame(createError);
   const { height } = useHeight();
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
       <div className="game-wrapper">
         <div style={{ height: height }} className="game">
-          <Topbar gameState={gameState} guessed={guessed} onClick={checkWin} />
+          <Topbar
+            gameState={gameState}
+            guessed={guessed}
+            onClickLeft={setOpenModal}
+            onClickRight={checkWin}
+          />
           <CSSTransition
             in={errorMessages.length > 0}
             timeout={500}
@@ -57,11 +63,22 @@ function Game() {
       </div>
       {gameState !== "active" && gameState !== "pause" && (
         <Modal
+          type="gameEnd"
           letters={letters}
           guessed={guessed}
           gameState={gameState}
           restart={restart}
-          onClickOverlay={() => setGameState("pause")}
+          onExit={() => setGameState("pause")}
+        />
+      )}
+      {openModal && (
+        <Modal
+          type="instructions"
+          letters={letters}
+          guessed={guessed}
+          gameState={gameState}
+          restart={restart}
+          onExit={() => setOpenModal(false)}
         />
       )}
     </>
